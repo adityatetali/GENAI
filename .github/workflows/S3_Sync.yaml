@@ -50,13 +50,13 @@ jobs:
           echo "$repo_name=$repo_name" >> $GITHUB_OUTPUT
           echo $repo_name
 
-          echo "Displaying the size"
-          du -sh
-
           # Create a temporary directory if it does not exist
-          mkdir -p temp
+          if [ ! -d "temp" ]; then
+          mkdir temp
+          fi
 
           # Copy the repository files to the temporary Directory
+          shopt -s extglob
           cp -R !(temp) temp/
 
           # Zip the repository files
